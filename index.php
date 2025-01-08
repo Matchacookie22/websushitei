@@ -138,22 +138,26 @@ include "koneksi.php";
       <div class="container">
         <h1 class="fw-bold display-4 pb-3">gallery</h1>
         <div id="carouselExample" class="carousel slide">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src="img/sushidry.jpg" class="d-block w-100" alt="..." />
-            </div>
-            <div class="carousel-item">
-              <img src="img/O_suhsitobiko.jpg" class="d-block w-100" alt="..." />
-            </div>
-            <div class="carousel-item">
-              <img src="img/W_sushivocado.jpg" class="d-block w-100" alt="..." />
-            </div>
-            <div class="carousel-item">
-              <img src="img/M_sushimentai.jpg" class="d-block w-100" alt="..." />
-            </div>
-            <div class="carousel-item">
-              <img src="img/O_sushisalmon.jpg" class="d-block w-100" alt="..." />
-            </div>
+        <?php
+                $sql = "SELECT * FROM gallery";
+                $hasil = $conn->query($sql);
+
+                $active = true; // Flag to set the first item as active
+                ?>
+                <div class="carousel-inner">
+                    <?php
+                    while ($row = $hasil->fetch_assoc()) {
+                    ?>
+                        <div class="carousel-item <?= $active ? 'active' : '' ?>">
+                            <img
+                                src="img/<?= $row["gambar"] ?>"
+                                class="d-block w-100"
+                                alt="..." />
+                        </div>
+                    <?php
+                        $active = false; // Set the flag to false after the first item
+                    }
+                    ?>
           </div>
           <button
             class="carousel-control-prev"
@@ -295,7 +299,7 @@ include "koneksi.php";
           ><i class="bi bi-whatsapp h2 p-2 text-dark"></i
         ></a>
       </div>
-      <div>Aprilyani Nur Safitri &copy; 2023</div>
+      <div>Ahmad Andrian Fitzal Rahman &copy; 2023</div>
     </footer>
     <!-- footer end -->
 
